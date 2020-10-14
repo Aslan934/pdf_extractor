@@ -122,9 +122,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
 STATIC_URL = '/static/'
 CELERY_BROKER_URL = 'amqp://localhost'
 CELERY_RESULT_BACKEND = "amqp"
+CELERY_TASK_SERIALIZER = "json"
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")

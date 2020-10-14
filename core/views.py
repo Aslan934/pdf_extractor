@@ -15,22 +15,24 @@ class CreateView(APIView):
     def post(self, request, filename=None, *args, **kwargs):
         fileModel = File()
         fileModel.filePdf = request.FILES['file']
+        fileModel.owner = request.user
         fileModel.save()
-        extractor.delay(fileModel.id)
+        extractor.delay(fileModel.id, fileModel.owner.id)
 
         return Response(fileModel.id)
 
 
 class CheckStatus(APIView):
+    permission_classes = [IsAuthenticated]
     lookup_url_kwarg = 'id'
 
-    def get_queryset(self):
+    def get_queryset(self, request):
         id = self.kwargs.get(self.lookup_url_kwarg)
-        data = File.objects.get(id=id)
-        return data
+        self.data = File.objects.get(id=id, owner=request.user)
+        return self.data
 
     def get(self, request, id=None):
-        result = AsyncResult(self.get_queryset().task_id)
+        result = AsyncResult(self.get_queryset(request).task_id)
         if result.state == 'SUCCESS':
-            return Response(self.get_queryset().content)
+            return Response(self.get_queryset(request).content)
         return Response(result.state)
