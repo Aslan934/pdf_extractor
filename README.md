@@ -17,7 +17,7 @@ Note: I used MySql in this projects, you can change back to default Sqlite db in
 
 Create SuperUser
 ```
-python manage.py create superuser
+python manage.py createsuperuser
 ```
 
 Run celery worker
