@@ -1,5 +1,5 @@
 # Asynchronous pdf extractor api
-Asynchronous pdf extractor api with django-rest framework and celery worker, protected with JWT authentication
+Asynchronous pdf extractor api with django-rest framework and celery/rabbitmq worker, protected with JWT authentication
 
 # Usage
 
