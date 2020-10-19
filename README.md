@@ -1,5 +1,5 @@
 # Asynchronous pdf extractor API
-Asynchronous pdf extractor api with django-rest framework and celery/rabbitmq worker, protected with JWT authentication
+Asynchronous pdf extractor API made with django-rest framework and celery/rabbitmq worker, protected with JWT authentication
 
 When we upload a PDF file to the `/api/v1/create` endpoint, this file is sent to the Celery in the backend and the record id that is linked to the authorized user id is returned and processing starts asynchronously. The file's content is extracted and saved to database. Celery storage is RabbitMQ. Also, you can use `/api/v1/check/:id ` endpoint to track the status. If processing has been finalized then it returns the content that was extracted from the document.
 
