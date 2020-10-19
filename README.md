@@ -8,7 +8,6 @@ List of endpoints:
 * /api/v1/refresh → JWT token refreshment
 * /api/v1/create → as a POST payload this endpoint will receive the .pdf file and document name
 * /api/v1/check/:id → get the status of processed file
-* /api/v1/search → FULL TEXT search from extracted contents (optional)
 
 # Usage
 
